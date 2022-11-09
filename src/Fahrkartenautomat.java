@@ -32,8 +32,7 @@ class Fahrkartenautomat {
             System.out.print("=");
             try {
                 Thread.sleep(200);
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
