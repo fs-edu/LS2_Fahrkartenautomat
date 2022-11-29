@@ -15,6 +15,10 @@ class Fahrkartenautomat {
         System.out.print("Zu zahlender Betrag (Euro): ");
         zuZahlenderBetrag = tastatur.nextDouble();
 
+        // Anzahl der Tickets eingeben
+        System.out.print("Anzahl der Tickets: ");
+        zuZahlenderBetrag = zuZahlenderBetrag * tastatur.nextInt();
+
         // Geldeinwurf
         eingezahlterGesamtbetrag = 0.0;
         nochZuZahlen = 0.0;
@@ -22,7 +26,6 @@ class Fahrkartenautomat {
             nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
 //            System.out.println("Noch zu zahlen: " + nochZuZahlen + " Euro");
             System.out.println("Noch zu zahlen: " + String.format("%.2f", nochZuZahlen) + " Euro");
-//            String.format("%.2f", nochZuZahlen)
             System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
             eingeworfeneMuenze = tastatur.nextDouble();
             eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
@@ -43,30 +46,31 @@ class Fahrkartenautomat {
         // 4 Rückgeldberechnung und -ausgabe
         rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
         if (rueckgabebetrag > 0.0) {
-            System.out.println("Der Rückgabebetrag in Höhe von " + rueckgabebetrag + " Euro");
+
+            System.out.println("Der Rückgabebetrag in Höhe von " + String.format("%.2f", rueckgabebetrag) + " Euro");
             System.out.println("wird in folgenden Münzen ausgezahlt:");
 
             while (rueckgabebetrag >= 2.0) { // 2-Euro-Münzen
                 System.out.println("2 Euro");
                 rueckgabebetrag = rueckgabebetrag - 2.0;
             }
-            while (rueckgabebetrag >= 1.0) { // 1-Euro-Münzen
+            while (rueckgabebetrag >= 0.9) { // 1-Euro-Münzen
                 System.out.println("1 Euro");
                 rueckgabebetrag = rueckgabebetrag - 1.0;
             }
-            while (rueckgabebetrag >= 0.5) { // 50-Cent-Münzen
+            while (rueckgabebetrag >= 0.49) { // 50-Cent-Münzen
                 System.out.println("50 Cent");
                 rueckgabebetrag = rueckgabebetrag - 0.5;
             }
-            while (rueckgabebetrag >= 0.2) { // 20-Cent-Münzen
+            while (rueckgabebetrag >= 0.19) { // 20-Cent-Münzen
                 System.out.println("20 Cent");
                 rueckgabebetrag = rueckgabebetrag - 0.2;
             }
-            while (rueckgabebetrag >= 0.1) { // 10-Cent-Münzen
+            while (rueckgabebetrag >= 0.09) { // 10-Cent-Münzen
                 System.out.println("10 Cent");
                 rueckgabebetrag = rueckgabebetrag - 0.1;
             }
-            while (rueckgabebetrag >= 0.05) { // 5-Cent-Münzen
+            while (rueckgabebetrag >= 0.049) { // 5-Cent-Münzen
                 System.out.println("5 Cent");
                 rueckgabebetrag = rueckgabebetrag - 0.05;
             }
