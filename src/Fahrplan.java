@@ -26,7 +26,7 @@ public class Fahrplan {
         } else {
             fahrzeit = fahrzeit + 34;
         }
-
+        //
         if (haltInStendal == 'j') {
             fahrzeit = fahrzeit + 16;
         } else {

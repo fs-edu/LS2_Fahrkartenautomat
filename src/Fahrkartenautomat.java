@@ -1,6 +1,29 @@
 import java.util.Scanner;
 
-class Fahrkartenautomat {
+class Fahrkartenautomat_tmp {
+
+    public static int getAnzahlDerTickets() {
+        Scanner tastatur = new Scanner(System.in);
+        int _default = 1;
+
+        System.out.print("Anzahl der Tickets: ");
+        int userInput = tastatur.nextInt();
+
+        if (userInput > 0 && userInput <= 10) {
+            return userInput;
+        } else {
+            System.out.println("ungültige Anzahl! Setzte Anzahl auf 1");
+            return _default;
+        }
+    }
+
+    public static double getZuZahlenderBetrag() {
+        Scanner tastatur = new Scanner(System.in);
+        System.out.print("Zu zahlender Betrag (Euro): ");
+        return tastatur.nextDouble();
+    }
+
+
     public static void main(String[] args) {
 
         Scanner tastatur = new Scanner(System.in);
@@ -12,19 +35,19 @@ class Fahrkartenautomat {
         double nochZuZahlen;
 
         // Geldbetrag eingeben
-        System.out.print("Zu zahlender Betrag (Euro): ");
-        zuZahlenderBetrag = tastatur.nextDouble();
+        zuZahlenderBetrag = getZuZahlenderBetrag();
 
         // Anzahl der Tickets eingeben
-        System.out.print("Anzahl der Tickets: ");
-        zuZahlenderBetrag = zuZahlenderBetrag * tastatur.nextInt();
+        int AnzahlDerTickets = getAnzahlDerTickets();
+
+        zuZahlenderBetrag = zuZahlenderBetrag * AnzahlDerTickets;
+        System.out.println("\nGesamtpreis der Tickets: " + String.format("%.2f", zuZahlenderBetrag) + " Euro");
 
         // Geldeinwurf
         eingezahlterGesamtbetrag = 0.0;
         nochZuZahlen = 0.0;
         while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
             nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
-//            System.out.println("Noch zu zahlen: " + nochZuZahlen + " Euro");
             System.out.println("Noch zu zahlen: " + String.format("%.2f", nochZuZahlen) + " Euro");
             System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
             eingeworfeneMuenze = tastatur.nextDouble();
