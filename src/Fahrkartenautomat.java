@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class Fahrkartenautomat_tmp {
+class Fahrkartenautomat {
 
     public static int getAnzahlDerTickets() {
         Scanner tastatur = new Scanner(System.in);
