@@ -28,7 +28,7 @@ public class Fahrkartenautomat_1 {
 		String Frage_Anzahl = "Anzahl der Tickets: ";
 		String Frage_TicketArt = "Ticket: ";
 
-		int TicketArt = FrageKunden(tastatur, Frage_TicketArt, 1, 4);
+		int TicketArt = FrageKunden(tastatur, Frage_TicketArt, 0, 4);
 		int TicketAnzahl = FrageKunden(tastatur, Frage_Anzahl, 0, 10);
 		double TicketPreis = getTicketPreis(TicketArt);
 
@@ -49,38 +49,32 @@ public class Fahrkartenautomat_1 {
 	}
 
 	public static double getTicketPreis(int TicketIndex) {
-		double output = 0.0;
-		switch (TicketIndex) {
-			case 1:
-				output = 2.00;
-			case 2:
-				output = 3.00;
-			case 3:
-				output = 8.80;
-			case 4:
-				output = 9.40;
-		}
-		return output;
+
+		if (TicketIndex == 1) {
+			return 2.00;
+		} else if (TicketIndex == 2) {
+			return 3.00;
+		} else if (TicketIndex == 3) {
+			return 8.80;
+		} else return 9.40;
 	}
 
 	public static double FahrkartenBezahlen(Scanner tastatur, double GesamtPreis) {
-		System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
 
 		double eingezahlterGesamtbetrag = 0.0;
-		double nochZuZahlen = 0.0;
+		double nochZuZahlen;
 
 		while (eingezahlterGesamtbetrag < GesamtPreis) {
-			double eingeworfeneMuenze = tastatur.nextDouble();
 			nochZuZahlen = GesamtPreis - eingezahlterGesamtbetrag;
 			System.out.println("Noch zu zahlen: " + String.format("%.2f", nochZuZahlen) + " Euro");
 			System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
+			double eingeworfeneMuenze = tastatur.nextDouble();
 			eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
 		}
 		return eingezahlterGesamtbetrag - GesamtPreis;
 	}
 
 	public static void RueckgabebetragAuszahlen(double rueckgabebetrag) {
-
 		if (rueckgabebetrag > 0.0) {
 			System.out.println("Der Rückgabebetrag in Höhe von " + String.format("%.2f", rueckgabebetrag) + " Euro");
 			System.out.println("wird in folgenden Münzen ausgezahlt:");
