@@ -67,8 +67,8 @@ public class Fahrkartenautomat_1 {
 			nochZuZahlen = GesamtPreis - eingezahlterGesamtbetrag;
 			System.out.println("Noch zu zahlen: " + String.format("%.2f", nochZuZahlen) + " Euro");
 			System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
-			double eingeworfeneMuenze = tastatur.nextDouble();
-			eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
+//			double eingeworfeneMuenze = tastatur.nextDouble();
+			eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + tastatur.nextDouble();
 		}
 		return eingezahlterGesamtbetrag - GesamtPreis;
 	}
@@ -105,7 +105,7 @@ public class Fahrkartenautomat_1 {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("\n\n");
+		System.out.println("\n");
 
 		System.out.println("""
 				Vergessen Sie nicht, den Fahrschein
