@@ -1,45 +1,26 @@
-import java.util.Scanner;
-
 public class Kalender {
+	public static void main(String[] args) {
 
-    public static int findMonth(int monat) {
+		String[] Kalender = {
+				"Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"
+		};
 
-        // "Januar", "März", "Mai", "Juli", "August", "Oktober", "Dezember"
-        Integer[] D31 = {1,3,5,7,9,12};
-        // "April", "Juni", "September", "November"
-        Integer[] D30 = {4,6,10,11};
+		for (int i = 0; i < 12; i++) {
+			Integer Monat = i + 1;
+			String Name = Kalender[i];
+			Integer Tage = getLength(i);
+			System.out.printf("\n" + Name + ", der %d-te Monat im Jahr, hat %d Tage.", Monat, Tage);
+		}
 
-        int tage = 0;
+	}
 
-        for (Integer value : D31) {
-            if (value == monat) {
-                tage = 31;
-                return tage;
-            }
-        }
-
-        for (Integer integer : D30) {
-            if (integer == monat) {
-                tage = 30;
-                return tage;
-            }
-        }
-
-        // wenn februar
-        return 28;
-    }
-
-    public static void main(String[] args) {
-        Scanner tastatur = new Scanner(System.in);
-        System.out.println("Hallo, dies ist die Kalender App");
-        System.out.print("Wie lautet der Monat (1-12): ");
-        int Monat = tastatur.nextInt();
-
-        Integer Tage = findMonth(Monat);
-        System.out.printf("Der %d-te Monat im Jahr hat %d Tage.", Monat, Tage);
-
-        tastatur.close();
-
-    }
-
+	public static int getLength(Integer Month) {
+		if (Month == 2) {
+			return 28;
+		} else if (Month % 2 == 0) {
+			return 31;
+		} else {
+			return 30;
+		}
+	}
 }
