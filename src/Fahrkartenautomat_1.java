@@ -49,7 +49,6 @@ public class Fahrkartenautomat_1 {
 	}
 
 	public static double getTicketPreis(int TicketIndex) {
-
 		if (TicketIndex == 1) {
 			return 2.00;
 		} else if (TicketIndex == 2) {
@@ -75,35 +74,25 @@ public class Fahrkartenautomat_1 {
 	}
 
 	public static void RueckgabebetragAuszahlen(double rueckgabebetrag) {
-		if (rueckgabebetrag > 0.0) {
-			System.out.println("Der Rückgabebetrag in Höhe von " + String.format("%.2f", rueckgabebetrag) + " Euro");
-			System.out.println("wird in folgenden Münzen ausgezahlt:");
+		System.out.println("Der Rückgabebetrag in Höhe von " + String.format("%.2f", rueckgabebetrag) + " Euro");
+		System.out.println("wird in folgenden Münzen ausgezahlt:");
 
-			while (rueckgabebetrag >= 2.0) { // 2-Euro-Münzen
-				System.out.println("2 Euro");
-				rueckgabebetrag = rueckgabebetrag - 2.0;
-			}
-			while (rueckgabebetrag >= 0.9) { // 1-Euro-Münzen
-				System.out.println("1 Euro");
-				rueckgabebetrag = rueckgabebetrag - 1.0;
-			}
-			while (rueckgabebetrag >= 0.49) { // 50-Cent-Münzen
-				System.out.println("50 Cent");
-				rueckgabebetrag = rueckgabebetrag - 0.5;
-			}
-			while (rueckgabebetrag >= 0.19) { // 20-Cent-Münzen
-				System.out.println("20 Cent");
-				rueckgabebetrag = rueckgabebetrag - 0.2;
-			}
-			while (rueckgabebetrag >= 0.09) { // 10-Cent-Münzen
-				System.out.println("10 Cent");
-				rueckgabebetrag = rueckgabebetrag - 0.1;
-			}
-			while (rueckgabebetrag >= 0.049) { // 5-Cent-Münzen
-				System.out.println("5 Cent");
-				rueckgabebetrag = rueckgabebetrag - 0.05;
-			}
+		rueckgabebetrag = calc(rueckgabebetrag, 2.0, "2 Euro");
+		rueckgabebetrag = calc(rueckgabebetrag, 1.0, "1 Euro");
+		rueckgabebetrag = calc(rueckgabebetrag, 0.5, "50 Cent");
+		rueckgabebetrag = calc(rueckgabebetrag, 0.2, "20 Cent");
+		rueckgabebetrag = calc(rueckgabebetrag, 0.1, "10 Cent");
+		calc(rueckgabebetrag, 0.05, "5 Cent");
+	}
+
+	public static double calc(double rueckgabebetrag, double muenze, String msg) {
+		double Threshold = muenze - 0.00000001;
+
+		while (rueckgabebetrag >= Threshold) {
+			System.out.println(msg);
+			rueckgabebetrag = rueckgabebetrag - muenze;
 		}
+		return rueckgabebetrag;
 	}
 
 	public static void TicketAusdrucken() {
