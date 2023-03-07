@@ -1,9 +1,27 @@
 import java.util.Scanner;
 
 public class Fahrkartenautomat_1 {
+
+	static double[] Preise = {3.00, 3.50, 3.80, 2.00, 8.60, 9.20, 10.00, 9.40, 12.60, 13.80, 25.50, 26.00, 26.50};
+	static String[] Tickets = {
+			"Einzelfahrschein AB",
+			"Einzelfahrschein BC",
+			"Einzelfahrschein ABC",
+			"Kurzstrecke AB",
+			"Tageskarte AB",
+			"Tageskarte BC",
+			"Tageskarte ABC",
+			"4-Fahrten-Karte AB",
+			"4-Fahrten-Karte BC",
+			"4-Fahrten-Karte ABC",
+			"Kleingruppen-Tageskarte AB",
+			"Kleingruppen-Tageskarte BC",
+			"Kleingruppen-Tageskarte ABC"
+	};
+
 	public static void main(String[] args) {
 		Scanner tastatur = new Scanner(System.in);
-		Begruessung();
+		TicketMenu();
 		double GesamtPreis = FahrkartenbestellungErfassen(tastatur);
 		System.out.println("\nGesamtpreis der Tickets: " + String.format("%.2f", GesamtPreis) + " Euro");
 
@@ -13,22 +31,26 @@ public class Fahrkartenautomat_1 {
 		tastatur.close();
 	}
 
-	public static void Begruessung() {
-		//	Ausgabe der Begrüßung
-		System.out.println("Herzlich Willkommen!");
-		System.out.println("Wählen Sie ihre Fahrkarte für Berlin AB aus:\n");
-		System.out.println("(1)\tKurzstrecke AB [2,00€]");
-		System.out.println("(2)\tEinzelfahrschein AB [3,00€]");
-		System.out.println("(3)\tTageskarte AB [8,80€]");
-		System.out.println("(4)\t4-Fahrten-Karte AB [9,40€]");
+	public static void TicketMenu() {
+		String Header = "     | Ticket                    | Zone | Preis\n";
+		String HeaderUnderline = "================================================";
+		System.out.println(Header + HeaderUnderline);
+
+		for (int i = 0; i < Tickets.length; i++) {
+			String[] TicketsSplit = Tickets[i].split("\\s");
+			System.out.printf("[%2d] | %-25s | %-4s | %.2f\n", i + 1, TicketsSplit[0], TicketsSplit[1], Preise[i]);
+		}
+
+		System.out.println("Auswahl: \f\r");
 	}
 
 	public static double FahrkartenbestellungErfassen(Scanner tastatur) {
 
 		String Frage_Anzahl = "Anzahl der Tickets: ";
 		String Frage_TicketArt = "Ticket: ";
+		int TicketAuswahlMgl = Tickets.length;
 
-		int TicketArt = FrageKunden(tastatur, Frage_TicketArt, 0, 4);
+		int TicketArt = FrageKunden(tastatur, Frage_TicketArt, 0, TicketAuswahlMgl);
 		int TicketAnzahl = FrageKunden(tastatur, Frage_Anzahl, 0, 10);
 		double TicketPreis = getTicketPreis(TicketArt);
 
@@ -49,13 +71,8 @@ public class Fahrkartenautomat_1 {
 	}
 
 	public static double getTicketPreis(int TicketIndex) {
-		if (TicketIndex == 1) {
-			return 2.00;
-		} else if (TicketIndex == 2) {
-			return 3.00;
-		} else if (TicketIndex == 3) {
-			return 8.80;
-		} else return 9.40;
+		TicketIndex = TicketIndex - 1;
+		return Preise[TicketIndex];
 	}
 
 	public static double FahrkartenBezahlen(Scanner tastatur, double GesamtPreis) {
@@ -67,7 +84,6 @@ public class Fahrkartenautomat_1 {
 			nochZuZahlen = GesamtPreis - eingezahlterGesamtbetrag;
 			System.out.println("Noch zu zahlen: " + String.format("%.2f", nochZuZahlen) + " Euro");
 			System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
-//			double eingeworfeneMuenze = tastatur.nextDouble();
 			eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + tastatur.nextDouble();
 		}
 		return eingezahlterGesamtbetrag - GesamtPreis;
@@ -106,7 +122,6 @@ public class Fahrkartenautomat_1 {
 			}
 		}
 		System.out.println("\n");
-
 		System.out.println("""
 				Vergessen Sie nicht, den Fahrschein
 				vor Fahrtantritt entwerten zu lassen!
